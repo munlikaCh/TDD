@@ -66,6 +66,13 @@ public class GameLoop implements Runnable {
                 e.printStackTrace();
             }
         }
+        //Game Over
+        javafx.application.Platform.runLater(() -> {
+            Popup popup = new Popup();
+            Label label = new Label("Game Over");
+            popup.getContent().addAll(label);
+            popup.show(Launcher.snakeStage);
+        });
     }
 
     //add
