@@ -1,6 +1,7 @@
 package model;
 
 import javafx.geometry.Point2D;
+import view.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,14 @@ public class Snake {
 
     public List<Point2D> getBody() {
         return body;
+    }
+
+    //5.5.3
+    public boolean isDead(){
+        boolean isOutOfBound = head.getX() < 0 || head.getY() < 0 || head.getX() >
+                Platform.WIDTH || head.getY() > Platform.HEIGHT;
+        boolean isHitBody = body.lastIndexOf(head) > 0;
+        return isOutOfBound || isHitBody;
     }
 
 }
