@@ -60,6 +60,11 @@ public class GameLoop implements Runnable {
             snake.grow();
             food.respawn();
         }
+        //f2
+        if (snake.isCollidingWith2(food)) {
+            snake.grow2();
+            food.respawn2();
+        }
         if (snake.isDead()) {
             running = false;
         }
@@ -88,8 +93,9 @@ public class GameLoop implements Runnable {
         //Game Over
         javafx.application.Platform.runLater(() -> {
             Popup popup = new Popup(); //pop up
-
             Label label = new Label("Game Over");
+
+            //css
             label.setFont(Font.font("Verdana", FontWeight.BOLD,15));
             label.setTextFill(Color.web("#EF3E36"));
             label.setStyle("-fx-padding: 10;" +
@@ -97,6 +103,7 @@ public class GameLoop implements Runnable {
                     "-fx-border-width: 2;" +
                     "-fx-border-insets: 2;" +
                     "-fx-background-color: black;");
+
             popup.getContent().addAll(label);
             popup.show(Launcher.snakeStage);
         });

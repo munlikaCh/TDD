@@ -45,8 +45,19 @@ public class Snake {
         return head.equals(food.getPosition());
     }
 
+    //f2
+    public boolean isCollidingWith2(Food food) {
+        return head.equals(food.getPosition2());
+    }
+
     public void grow() {
         score++;
+        body.add(prev_tail);
+    }
+
+    //f2
+    public void grow2() {
+        score = score + 5 ; //5 sc
         body.add(prev_tail);
     }
 

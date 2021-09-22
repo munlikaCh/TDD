@@ -42,6 +42,11 @@ public class Platform extends Pane {
         gc.setFill(Color.RED);
         gc.fillRect(food.getPosition().getX() * TILE_SIZE, food.getPosition().getY()
                 * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
+        //f2
+        gc.setFill(Color.GREEN);
+        gc.fillRect(food.getPosition2().getX() * TILE_SIZE, food.getPosition2().getY()
+                * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
     public KeyCode getKey() { return key;}
     public void setKey(KeyCode key) { this.key = key; }
