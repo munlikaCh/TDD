@@ -33,4 +33,30 @@ public class SnakeTest {
         assertEquals(snake.getHead(), new Point2D(0, 1));
     }
 
+    @Test
+    public void collisionFlagShouldRaiseIfSnakeCollideWithFood(){
+        Food food = new Food(new Point2D(0,0));
+        assertTrue(snake.isCollidingWith(food));
+    }
+
+    @Test
+    public void foodShouldRespawnOnDifferentCoordinates(){
+        Food food = new Food(new Point2D(0,0));
+        food.respawn();
+        assertNotSame(food.getPosition(),new Point2D(0,0));
+    }
+
+    @Test
+    public void snakeGrowthShouldAddItsLengthByOne(){
+        snake.grow();
+        assertEquals(snake.getLength(),2);
+    }
+
+    @Test
+    public void bodyOfGrownSnakeShouldContainPreviousHead() {
+        Point2D cur_head = snake.getHead();
+        snake.update();
+        snake.grow();
+        assertTrue(snake.getBody().contains(cur_head));
+    }
 }

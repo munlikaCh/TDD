@@ -3,6 +3,7 @@ package model;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Snake {
     private Direction direction;
@@ -34,4 +35,22 @@ public class Snake {
     public Point2D getHead() {
         return head;
     }
+
+    //5.5.2
+    public boolean isCollidingWith(Food food) {
+        return head.equals(food.getPosition());
+    }
+
+    public void grow() {
+        body.add(prev_tail);
+    }
+
+    public int getLength() {
+        return body.size();
+    }
+
+    public List<Point2D> getBody() {
+        return body;
+    }
+
 }
