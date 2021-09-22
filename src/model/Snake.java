@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Snake {
+    //score
+    private int score=0;
+
     private Direction direction;
     private Point2D head;
     private Point2D prev_tail;
@@ -43,6 +46,7 @@ public class Snake {
     }
 
     public void grow() {
+        score++;
         body.add(prev_tail);
     }
 
@@ -60,6 +64,11 @@ public class Snake {
                 Platform.WIDTH || head.getY() > Platform.HEIGHT;
         boolean isHitBody = body.lastIndexOf(head) > 0;
         return isOutOfBound || isHitBody;
+    }
+
+    //get score
+    public int getScore() {
+        return score;
     }
 
 }

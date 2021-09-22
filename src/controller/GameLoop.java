@@ -2,12 +2,19 @@ package controller;
 
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Border;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Popup;
 import model.Direction;
 import model.Food;
 import model.Snake;
 import view.Platform;
+import view.Score;
 
+
+import javax.swing.border.LineBorder;
 import java.util.ArrayList;
 
 public class GameLoop implements Runnable {
@@ -39,6 +46,14 @@ public class GameLoop implements Runnable {
 
         snake.update();
     }
+    //update sc
+    private void updateScore(ArrayList<Score> scoreList) {
+        javafx.application.Platform.runLater(() -> {
+            for (int i = 0; i < scoreList.size(); i++) {
+                scoreList.get(i).setPoint(snake.getScore());
+            }
+        });
+    }
 
     private void checkCollision() {
         if (snake.isCollidingWith(food)) {
@@ -59,6 +74,10 @@ public class GameLoop implements Runnable {
         while (running) {
             update();
             checkCollision();
+
+            //up sc
+            updateScore(platform.getScoreList());
+
             redraw();
             try {
                 Thread.sleep((long) interval);
@@ -68,8 +87,16 @@ public class GameLoop implements Runnable {
         }
         //Game Over
         javafx.application.Platform.runLater(() -> {
-            Popup popup = new Popup();
+            Popup popup = new Popup(); //pop up
+
             Label label = new Label("Game Over");
+            label.setFont(Font.font("Verdana", FontWeight.BOLD,15));
+            label.setTextFill(Color.web("#EF3E36"));
+            label.setStyle("-fx-padding: 10;" +
+                    "-fx-border-style: solid inside;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-border-insets: 2;" +
+                    "-fx-background-color: black;");
             popup.getContent().addAll(label);
             popup.show(Launcher.snakeStage);
         });
